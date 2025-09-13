@@ -1,0 +1,6 @@
+1. take the project, deploy this in aws ec2. do not use aws access key and scerte skley, instead use IAM role mapped 
+to ec2 for ses auth
+
+2. our app generate logs, setup a log rotation for them. 
+
+3. Write your detained inytro in yaml format
