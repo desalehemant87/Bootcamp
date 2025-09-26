@@ -17,6 +17,8 @@ ENV PYTHONUNBUFFERED=1
 ENV CHECK_INTERVAL=30
 ENV ALERT_COOLDOWN=300
 ENV BUFFER_TIMEOUT=60
+ENV SENDER_EMAIL=hemharsh87@gmail.com
+ENV RECIPIENT_EMAILS=desalehemant87@gmail.com
 
 # Create a non-root user for security
 RUN useradd -m -s /bin/bash alertuser && \

@@ -12,13 +12,11 @@ class AlertService:
         # AWS SES Configuration
         self.ses_client = boto3.client(
             'ses',
-            region_name=os.getenv('AWS_REGION', 'us-east-1'),
-            aws_access_key_id=os.getenv('AWS_ACCESS_KEY_ID'),
-            aws_secret_access_key=os.getenv('AWS_SECRET_ACCESS_KEY')
+            region_name=os.getenv('AWS_REGION', 'us-south-1'),
         )
         
         # Email configuration
-        self.sender_email = os.getenv('SENDER_EMAIL', 'monitoring@yourdomain.com')
+        self.sender_email = os.getenv('SENDER_EMAIL','hemharsh87@gmail.com')
         self.recipient_emails = os.getenv('RECIPIENT_EMAILS', '').split(',')
         
         # Alert configuration
@@ -265,14 +263,12 @@ Alert Frequency:
 
 if __name__ == "__main__":
     # Check required environment variables
-    required_vars = ['AWS_ACCESS_KEY_ID', 'AWS_SECRET_ACCESS_KEY', 'SENDER_EMAIL', 'RECIPIENT_EMAILS']
+    required_vars = ['SENDER_EMAIL', 'RECIPIENT_EMAILS']
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     
     if missing_vars:
         print(f"Error: Missing required environment variables: {', '.join(missing_vars)}")
         print("Required variables:")
-        print("  AWS_ACCESS_KEY_ID - AWS access key for SES")
-        print("  AWS_SECRET_ACCESS_KEY - AWS secret key")
         print("  SENDER_EMAIL - Verified sender email in SES")
         print("  RECIPIENT_EMAILS - Comma-separated list of recipient emails")
         exit(1)

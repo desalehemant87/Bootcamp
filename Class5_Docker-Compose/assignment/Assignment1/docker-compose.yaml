@@ -3,7 +3,7 @@ services:
     image: postgres:15-alpine
     container_name: db
     environment:
-      POSTGRES_DB: appdb
+      POSTGRES_DB: monitordb
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres123
     volumes:
@@ -100,8 +100,8 @@ services:
       - CONTAINER_NAME=flask-app
       - ALERT_LOG=/var/log/container_alerts.log
       - AWS_REGION=${AWS_REGION:-ap-south-1}
-      - SENDER_EMAIL=${SENDER_EMAIL}
-      - RECIPIENT_EMAILS=${RECIPIENT_EMAILS}
+      - SENDER_EMAIL=${SENDER_EMAIL:-hemharsh87@gmail.com}
+      - RECIPIENT_EMAILS=${RECIPIENT_EMAILS:-desalehemant87@gmail.com}
       - CHECK_INTERVAL=${CHECK_INTERVAL:-30}
       - ALERT_COOLDOWN=${ALERT_COOLDOWN:-300}
       - BUFFER_TIMEOUT=${BUFFER_TIMEOUT:-60}
