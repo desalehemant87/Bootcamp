@@ -2787,3 +2787,10 @@
 [2025-09-26 10:59:21] [INFO] Starting container monitoring for flask-app
 [2025-09-26 10:59:23] [INFO] CPU: 100.87%, Memory: 492.2MB (48.07%), Response Time: 95ms, Status: healthy
 [2025-09-26 10:59:27] [INFO] Starting container monitoring for flask-app
+[2025-09-26 10:59:29] [INFO] CPU: 0.02%, Memory: 612.4MB (59.80%), Response Time: 26ms, Status: healthy
+[2025-09-26 10:59:32] [INFO] Starting container monitoring for flask-app
+[2025-09-26 10:59:34] [INFO] CPU: 0.02%, Memory: 612.4MB (59.80%), Response Time: 26ms, Status: healthy
+[2025-09-26 10:59:39] [INFO] Starting container monitoring for flask-app
+[2025-09-26 10:59:41] [INFO] CPU: 98.43%, Memory: 905.5MB (88.43%), Response Time: 231ms, Status: healthy
+[2025-09-26 10:59:45] [INFO] Starting container monitoring for flask-app
+[2025-09-26 10:59:47] [INFO] CPU: 33.34%, Memory: 95.96MB (9.37%), Response Time: 84ms, Status: healthy
