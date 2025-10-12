@@ -1,0 +1,1 @@
+Refer class 8 folder ---> Class8_session_aws-3-tier-architecture-terraform for class session
