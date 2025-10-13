@@ -53,7 +53,7 @@ variable "db_default_settings" {
 
 variable "public_hosted_zone_id" {
   description = "The hosted zone id for the public domain"
-  default     = "hemantapps.site"
+  default     = "hemantdesale.tech"
 }
 
 variable "domain_name" {

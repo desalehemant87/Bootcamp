@@ -1,0 +1,4 @@
+bucket  = "state-bucket-059941826920"
+key     = "class10/dev/terraform.tfstate"
+region  = "ap-south-1"
+encrypt = true
