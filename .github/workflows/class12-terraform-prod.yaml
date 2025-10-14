@@ -1,0 +1,51 @@
+name: terraform prod class11
+
+on: 
+  workflow_dispatch:
+
+env:
+   terraform_version : 1.5.7
+   infra_path: Class10_ECS+Terraform-pure-dynamic-code+multi-env-deployment+autoscaling-bits/Class10_Assignment
+
+jobs:
+  terraform-fmt :
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.terraform_version }}
+
+      - name: Terraform fmt
+        working-directory: ${{ env.infra_path }}
+        run: terraform fmt -check
+  
+  terraform-dev:
+    runs-on: ubuntu-latest
+    needs: [terraform-fmt]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.terraform_version }}
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Terraform Init
+        working-directory: ${{ env.infra_path }}
+        run: terraform init -backend-config=vars/prod.tfbackend
+
+      - name: Terraform plan
+        working-directory: ${{ env.infra_path }}
+        run: terraform plan -var-file=vars/prod.tfvars
