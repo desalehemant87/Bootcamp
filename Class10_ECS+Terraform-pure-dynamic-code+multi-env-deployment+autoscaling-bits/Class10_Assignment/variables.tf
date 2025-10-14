@@ -26,7 +26,7 @@ variable "environment" {
 
 variable "prefix" {
   description = "main"
-  default = "main"
+  default     = "main"
 }
 
 variable "subnet_cidrs" {
@@ -64,7 +64,7 @@ variable "public_hosted_zone_id" {
 
 variable "domain_name" {
   description = "hemantdesale.tech"
-  default = "hemantdesale.tech"
+  default     = "hemantdesale.tech"
 }
 
 variable "ecs_app_values" {

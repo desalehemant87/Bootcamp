@@ -1,14 +1,14 @@
 # ALB
 resource "aws_lb" "alb" {
-  name               = "${var.environment}-${var.app_name}-alb"
-  internal           = false
-  security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [aws_subnet.public_sub1.id, aws_subnet.public_sub2.id]
+  name                       = "${var.environment}-${var.app_name}-alb"
+  internal                   = false
+  security_groups            = [aws_security_group.alb_sg.id]
+  subnets                    = [aws_subnet.public_sub1.id, aws_subnet.public_sub2.id]
   enable_deletion_protection = false
   tags = {
     Name = "${var.environment}-lb"
   }
-  
+
 }
 
 # ALB Target Group

@@ -5,7 +5,7 @@ resource "aws_kms_key" "rds_kms" {
   enable_key_rotation     = true
 
   tags = {
-    Name = "${var.environment}-rds-kms-key"
+    Name        = "${var.environment}-rds-kms-key"
     Environment = var.environment
   }
 }
