@@ -5,7 +5,7 @@ on:
 
 env:
   terraform_version : 1.5.7
-  infra_path: class10*/Class10_Assignment
+  infra_path: class10**/Class10_Assignment
 
 jobs:
   terraform-fmt : 
