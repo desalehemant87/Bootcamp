@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "ecs" {
           {
             "containerPort" = tonumber("${var.ecs_app_values["container_port"]}"),
             "hostPort"      = tonumber("${var.ecs_app_values["container_port"]}")
-            
+
           }
         ],
         "essential" : true,

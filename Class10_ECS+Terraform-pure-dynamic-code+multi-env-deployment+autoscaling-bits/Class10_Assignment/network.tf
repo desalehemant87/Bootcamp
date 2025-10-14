@@ -8,13 +8,13 @@ resource "aws_vpc" "main" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
-    Name = "${var.environment}-vpc"
+    Name    = "${var.environment}-vpc"
     Project = var.project_name
   }
 }
 
 # Internet Gateway
-resource "aws_internet_gateway" "igw" { 
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
 
   tags = {
@@ -25,7 +25,7 @@ resource "aws_internet_gateway" "igw" {
 # Public Subnet 1
 resource "aws_subnet" "public_sub1" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "${var.subnet_cidrs[0]}"
+  cidr_block              = var.subnet_cidrs[0]
   map_public_ip_on_launch = true
   availability_zone       = "${data.aws_region.current.id}a"
   tags = {
@@ -34,9 +34,9 @@ resource "aws_subnet" "public_sub1" {
 }
 
 # Public Subnet 2
-resource "aws_subnet" "public_sub2" { 
+resource "aws_subnet" "public_sub2" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "${var.subnet_cidrs[1]}"
+  cidr_block              = var.subnet_cidrs[1]
   map_public_ip_on_launch = true
   availability_zone       = "${data.aws_region.current.id}b"
   tags = {
@@ -56,16 +56,16 @@ resource "aws_route_table" "public_rt" {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.igw.id
   }
-    depends_on = [aws_internet_gateway.igw]
+  depends_on = [aws_internet_gateway.igw]
 }
 
 # Associate Public Subnet 1 with Public Route Table
-resource "aws_route_table_association" "public_sub1_association" {  
+resource "aws_route_table_association" "public_sub1_association" {
   subnet_id      = aws_subnet.public_sub1.id
   route_table_id = aws_route_table.public_rt.id
 }
 # Associate Public Subnet 2 with Public Route Table
-resource "aws_route_table_association" "public_sub2_association" {  
+resource "aws_route_table_association" "public_sub2_association" {
   subnet_id      = aws_subnet.public_sub2.id
   route_table_id = aws_route_table.public_rt.id
 }
@@ -105,9 +105,9 @@ resource "aws_nat_gateway" "nat_gw2" {
 }
 
 # Private Subnet 1
-resource "aws_subnet" "private_sub1" {  
+resource "aws_subnet" "private_sub1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "${var.subnet_cidrs[2]}"
+  cidr_block        = var.subnet_cidrs[2]
   availability_zone = "${data.aws_region.current.id}a"
   tags = {
     Name = "${var.environment}-private-sub1"
@@ -115,14 +115,14 @@ resource "aws_subnet" "private_sub1" {
 }
 
 # Private Subnet 2
-resource "aws_subnet" "private_sub2" {  
+resource "aws_subnet" "private_sub2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "${var.subnet_cidrs[3]}"
+  cidr_block        = var.subnet_cidrs[3]
   availability_zone = "${data.aws_region.current.id}b"
   tags = {
     Name = "${var.environment}-private-sub2"
   }
-} 
+}
 
 # Private Route Table for private subnet 1
 resource "aws_route_table" "private_rt1" {
@@ -134,7 +134,7 @@ resource "aws_route_table" "private_rt1" {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat_gw1.id
   }
-    depends_on = [aws_nat_gateway.nat_gw1]
+  depends_on = [aws_nat_gateway.nat_gw1]
 }
 
 # Private Route Table for private subnet 2
@@ -147,36 +147,36 @@ resource "aws_route_table" "private_rt2" {
     cidr_block     = "0.0.0.0/0"
     nat_gateway_id = aws_nat_gateway.nat_gw2.id
   }
-    depends_on = [aws_nat_gateway.nat_gw2]
+  depends_on = [aws_nat_gateway.nat_gw2]
 }
 
 # Associate Private Subnet 1 with Private Route Table
-resource "aws_route_table_association" "private_sub1_association" {  
+resource "aws_route_table_association" "private_sub1_association" {
   subnet_id      = aws_subnet.private_sub1.id
   route_table_id = aws_route_table.private_rt1.id
 }
 
 # Associate Private Subnet 2 with Private Route Table
-resource "aws_route_table_association" "private_sub2_association" {  
+resource "aws_route_table_association" "private_sub2_association" {
   subnet_id      = aws_subnet.private_sub2.id
   route_table_id = aws_route_table.private_rt2.id
 }
 
 # 2 private subnet for database
 # RDS(DB) Subnet 1
-resource "aws_subnet" "rds_sub1" {  
+resource "aws_subnet" "rds_sub1" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "${var.subnet_cidrs[4]}"
+  cidr_block        = var.subnet_cidrs[4]
   availability_zone = "${data.aws_region.current.id}a"
   tags = {
     Name = "${var.environment}-rds-sub1"
   }
-} 
+}
 
 # RDS(DB) Subnet 2
-resource "aws_subnet" "rds_sub2" {  
+resource "aws_subnet" "rds_sub2" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "${var.subnet_cidrs[5]}"
+  cidr_block        = var.subnet_cidrs[5]
   availability_zone = "${data.aws_region.current.id}b"
   tags = {
     Name = "${var.environment}-rds-sub2"
@@ -184,7 +184,7 @@ resource "aws_subnet" "rds_sub2" {
 }
 
 # ALB security group for load balancer -> inbound on port 80(http) and 443(for https) from internet(everywhere)
-resource "aws_security_group" "alb_sg" {  
+resource "aws_security_group" "alb_sg" {
   name        = "${var.environment}-${var.app_name}-alb-sg"
   description = "Security group for ALB - allows inbound traffic on port 80 and 443 from the world"
   vpc_id      = aws_vpc.main.id
@@ -196,10 +196,10 @@ resource "aws_security_group" "alb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-        from_port   = 443
-        to_port     = 443
-        protocol    = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
     from_port   = 0
@@ -207,13 +207,13 @@ resource "aws_security_group" "alb_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    tags = {
-        Name = "${var.environment}-${var.app_name}-alb-sg"
-    }
+  tags = {
+    Name = "${var.environment}-${var.app_name}-alb-sg"
+  }
 }
 
 # ECS security group --> inbound on port 8000 from load balancer(alb) only
-resource "aws_security_group" "ecs_service_sg" {  
+resource "aws_security_group" "ecs_service_sg" {
   name        = "${var.environment}-${var.app_name}-ecs-sg"
   description = "Security group for ECS - allows inbound traffic from ALB SG on port 8000"
   vpc_id      = aws_vpc.main.id
@@ -222,7 +222,7 @@ resource "aws_security_group" "ecs_service_sg" {
     from_port       = var.ecs_app_values["container_port"]
     to_port         = var.ecs_app_values["container_port"]
     protocol        = "tcp"
-    security_groups = [aws_security_group.alb_sg.id]  # allow from alb sg only
+    security_groups = [aws_security_group.alb_sg.id] # allow from alb sg only
   }
 
   egress {
@@ -231,22 +231,22 @@ resource "aws_security_group" "ecs_service_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    tags = {
-        Name = "${var.environment}-${var.app_name}-ecs-sg"
-    }
+  tags = {
+    Name = "${var.environment}-${var.app_name}-ecs-sg"
+  }
 }
 
 # RDS security group -> inbound on port 5432 from ecs only
-resource "aws_security_group" "rds_sg" {  
+resource "aws_security_group" "rds_sg" {
   name        = "${var.environment}-${var.app_name}-rds-sg"
   description = "Security group for RDS - allows MySQL access from ecs tasks"
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    security_groups = [aws_security_group.ecs_service_sg.id]  # allow from ecs service sg only
+    from_port       = 5432
+    to_port         = 5432
+    protocol        = "tcp"
+    security_groups = [aws_security_group.ecs_service_sg.id] # allow from ecs service sg only
   }
 
   egress {
@@ -255,7 +255,7 @@ resource "aws_security_group" "rds_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    tags = {
-        Name = "${var.environment}-${var.app_name}-rdsdb-sg"
-    }
+  tags = {
+    Name = "${var.environment}-${var.app_name}-rdsdb-sg"
+  }
 }
