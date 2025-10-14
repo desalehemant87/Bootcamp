@@ -1,5 +1,5 @@
 resource "aws_db_instance" "postgres" {
-  identifier            = "${var.environment}-${var.app_name}-db"
+  identifier            = "${var.environment}-${var.app_name}-db1"
   allocated_storage     = var.db_default_settings.allocated_storage
   max_allocated_storage = var.db_default_settings.max_allocated_storage
   engine                = "postgres"
@@ -36,7 +36,7 @@ resource "random_password" "dbs_random_string" {
   override_special = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 }
 
-resource "aws_secretsmanager_secret" "pgdb_link" {
+resource "aws_secretsmanager_secret" "db_link" {
   name                    = "db/${aws_db_instance.postgres.identifier}"
   description             = "DB link"
   kms_key_id              = aws_kms_key.rds_kms.arn
@@ -47,7 +47,7 @@ resource "aws_secretsmanager_secret" "pgdb_link" {
 }
 
 resource "aws_secretsmanager_secret_version" "dbs_secret_val" {
-  secret_id     = aws_secretsmanager_secret.pgdb_link.id
+  secret_id     = aws_secretsmanager_secret.db_link.id
   secret_string = "postgresql://${var.db_default_settings.db_admin_username}:${random_password.dbs_random_string.result}@${aws_db_instance.postgres.address}:${aws_db_instance.postgres.port}/${aws_db_instance.postgres.db_name}"
 
   lifecycle {
