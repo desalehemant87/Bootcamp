@@ -1,4 +1,4 @@
-name: terraform prod class11
+name: terraform prod class12
 
 on: 
   workflow_dispatch:
