@@ -1,5 +1,5 @@
 resource "aws_db_instance" "postgres" {
-  identifier            = "${var.environment}-${var.app_name}-db1"
+  identifier            = "${var.environment}-${var.app_name}-db"
   allocated_storage     = var.db_default_settings.allocated_storage
   max_allocated_storage = var.db_default_settings.max_allocated_storage
   engine                = "postgres"
@@ -37,7 +37,7 @@ resource "random_password" "dbs_random_string" {
 }
 
 resource "aws_secretsmanager_secret" "db_link" {
-  name                    = "db/${aws_db_instance.postgres.identifier}"
+  name                    = "db/${aws_db_instance.postgres.identifier}-new"
   description             = "DB link"
   kms_key_id              = aws_kms_key.rds_kms.arn
   recovery_window_in_days = 7
