@@ -5,7 +5,7 @@ on:
 
 env:
   terraform_version : 1.5.7
-  infra_path: Class10**/Class10_Assignment
+  infra_path: Class10_ECS+Terraform-pure-dynamic-code+multi-env-deployment+autoscaling-bits/Class10_Assignment
 
 jobs:
   terraform-fmt : 
