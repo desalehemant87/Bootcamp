@@ -38,7 +38,7 @@ jobs:
 
       - name: docker build 
         run: |
-          cd Class6_7_aws_console_wordpress_ecs_farget_rds
+          cd Class6_7_aws_console_wordpress_ecs_farget_rds/Class6_Session
           docker build -t studentportal .
           docker tag studentportal ${{ env.ecr_repo }}:${{ env.image_tag }}
 
