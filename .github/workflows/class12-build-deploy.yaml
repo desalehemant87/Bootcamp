@@ -38,9 +38,9 @@ jobs:
 
       - name: docker build 
         run: |
-          cd class6
-          docker build -t ecsapp .
-          docker tag ecsapp ${{ env.ecr_repo }}:${{ env.image_tag }}
+          cd Class6_7_aws_console_wordpress_ecs_farget_rds
+          docker build -t studentportal .
+          docker tag studentportal ${{ env.ecr_repo }}:${{ env.image_tag }}
 
       - name: docker push
         run: docker push ${{ env.ecr_repo }}:${{ env.image_tag }}
