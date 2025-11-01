@@ -19,11 +19,11 @@ variable "domain_name" {
 variable "db_default_settings" {
   type = any
   default = {
-    allocated_storage       = 30
-    max_allocated_storage   = 50
+    allocated_storage       = 10
+    max_allocated_storage   = 20
     engine_version          = "14.15"
     engine                 = "postgres"
-    instance_class          = "db.t2.micro"
+    instance_class          = "db.t3.micro"
     backup_retention_period = 2
     db_name                 = "postgres"
     ca_cert_name            = "rds-ca-rsa2048-g1"
