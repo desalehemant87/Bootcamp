@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       terraform_action:
-        description: 'plan/apply/destroy'
+        description: 'apply/destroy'
         required: true
       environment:
         description: 'Environment to deploy (dev/prod)'
