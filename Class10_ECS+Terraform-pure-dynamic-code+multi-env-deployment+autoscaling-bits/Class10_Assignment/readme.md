@@ -6,7 +6,7 @@ This Terraform project provisions a complete AWS infrastructure for hosting a co
 
 This infrastructure deploys a highly available, scalable web application with the following components:
 
-- **Region**: us-east-1
+- **Region**: ap-south-1
 - **Organization**: livingdevops
 - **Team**: august bootcamp
 
@@ -61,9 +61,9 @@ This infrastructure deploys a highly available, scalable web application with th
 - **Security Group**: Allows inbound HTTP/HTTPS from internet
 
 ### DNS & SSL (route53.tf)
-- **Route53 Hosted Zone**: rajeshapps.site
-- **DNS Record**: august.rajeshapps.site pointing to ALB
-- **ACM Certificate**: SSL certificate for august.rajeshapps.site
+- **Route53 Hosted Zone**: hemantdesale.tech
+- **DNS Record**: august.hemantdesale.tech pointing to ALB
+- **ACM Certificate**: SSL certificate for august.hemantdesale.tech
 - **DNS Validation**: Automated via Route53
 
 ### Monitoring (clowdwatch.tf)
@@ -81,22 +81,22 @@ This infrastructure deploys a highly available, scalable web application with th
 
 ## State Management
 
-- **Backend**: S3 bucket `state-bucket-307946636515`
+- **Backend**: S3 bucket `state-bucket-059941826920`
 - **State file**: `august-bootcamp25/terraform.tfstate`
-- **Region**: us-east-1
+- **Region**: ap-south-1
 - **Encryption**: Enabled
 
 ## Prerequisites
 
-1. AWS Account (ID: 879381241087)
+1. AWS Account (ID: 059941826920)
 2. Terraform version 1.5.7
 3. AWS provider ~> 6.0.0
 4. Existing resources:
    - Elastic IP allocation: `eipalloc-0e0fac707feec10ea`
    - KMS key: `alias/dev-august-batch-rds`
-   - Route53 hosted zone: `rajeshapps.site`
-   - ECR repository with image: `307946636515.dkr.ecr.us-east-1.amazonaws.com/ecs-studentportal:1.0`
-   - S3 bucket for state: `state-bucket-307946636515`
+   - Route53 hosted zone: `hemantdesale.tech`
+   - ECR repository with image: `059941826920.dkr.ecr.ap-south-1.amazonaws.com/ecs-studentportal:1.0`
+   - S3 bucket for state: `state-bucket-059941826920`
 
 ## Usage
 
@@ -123,8 +123,8 @@ terraform destroy
 ## Application Access
 
 Once deployed, the application is accessible at:
-- **HTTP**: http://august.rajeshapps.site
-- **HTTPS**: https://august.rajeshapps.site
+- **HTTP**: http://august.hemantdesale.tech
+- **HTTPS**: https://august.hemantdesale.tech
 
 ## Security Features
 
@@ -147,8 +147,8 @@ Once deployed, the application is accessible at:
 
 ## Pre-requisites to run this terraform code:
 
-- Create S3 bucket named "state-bucket-307946636515"
-- Create public hosted zone named "rajeshapps.site"
+- Create S3 bucket named "state-bucket-059941826920"
+- Create public hosted zone named "hemantdesale.tech"
 - Make sure the NS entries are correct in godaddy domain settings
 - During RDS creation, do skip_final_snapshot   = true (For Non-Prod)
 
@@ -190,7 +190,7 @@ terraform apply -var-file=vars/prod.tfvars
 
 
 ### ECR Login command (For Testing purpose):
-Execute: `aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 307946636515.dkr.ecr.us-east-1.amazonaws.com` from cli
+Execute: `aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 059941826920.dkr.ecr.ap-south-1.amazonaws.com` from cli
 
 
 ### Load testing using docker container
