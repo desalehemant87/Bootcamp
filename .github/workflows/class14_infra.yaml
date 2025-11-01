@@ -35,10 +35,6 @@ jobs:
         working-directory: ${{ env.working_directory }}
         run: terraform init -backend-config=vars/${{ env.environment }}.tfbackend
 
-      - name: Terraform plan
-        working-directory: ${{ env.working_directory }}
-        run: terraform plan -var-file=vars/${{ env.environment }}.tfvars
-
-      - name: Terraform Apply
+      - name: Terraform Plan/Apply/Destroy
         working-directory: ${{ env.working_directory }}
         run: terraform ${{ env.terraform_action }} -var-file=vars/${{ env.environment }}.tfvars --auto-approve

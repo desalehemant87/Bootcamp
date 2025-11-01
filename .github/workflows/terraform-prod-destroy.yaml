@@ -32,7 +32,7 @@ jobs:
           cd ${{ env.infra_path }}
           terraform init -backend-config=vars/prod.tfbackend
 
-      - name: Terraform Apply
+      - name: Terraform Destroy
         # run: terraform plan
         run: |
           cd ${{ env.infra_path }}

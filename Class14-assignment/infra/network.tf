@@ -22,7 +22,7 @@ resource aws_subnet "private" {
   vpc_id            = aws_vpc.main.id
   count             = 2
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
     tags = {
         Name = "${var.environment}-ecs-fargate-private-sub-${count.index}"
     }
@@ -32,7 +32,7 @@ resource "aws_subnet" "rds" {
   vpc_id            = aws_vpc.main.id
   count             = 2
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, 4 + count.index)
-  availability_zone = data.aws_availability_zones.available.names[count.index]
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
     tags = {
         Name = "${var.environment}-rds-private-sub-${count.index}"
     }
