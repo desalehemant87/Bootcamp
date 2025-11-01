@@ -21,7 +21,7 @@ variable "db_default_settings" {
   default = {
     allocated_storage       = 10
     max_allocated_storage   = 20
-    engine_version          = "14.15"
+    engine_version          = "17.6"
     engine                 = "postgres"
     instance_class          = "db.t4g.micro"
     backup_retention_period = 2
