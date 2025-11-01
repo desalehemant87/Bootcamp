@@ -1,4 +1,4 @@
-name: Infra Deployment for ECS
+name: Class14 Infra Deployment for ECS
 
 on:
   workflow_dispatch:
