@@ -21,7 +21,6 @@ resource "aws_db_instance" "postgres" {
   identifier            = "${var.environment}-${var.app_name}-db"
   allocated_storage     = lookup(local.db_data, "allocated_storage", var.db_default_settings.allocated_storage)
   max_allocated_storage = lookup(local.db_data, "max_allocated_storage", var.db_default_settings.max_allocated_storage)
-  engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
   engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
   instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
   username              = var.db_default_settings.db_admin_username
