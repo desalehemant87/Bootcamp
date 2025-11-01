@@ -11,7 +11,7 @@ resource "aws_subnet" "public" {
   vpc_id            = aws_vpc.main.id
   count             = 2
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, 2 + count.index)
-  availability_zone = element(data.aws_availability_zones.available.names, count.index)
+  availability_zone = data.aws_availability_zones.available_zones.names[count.index]
   map_public_ip_on_launch = true
     tags = {
         Name = "${var.environment}-ecs-fargate-public-sub-${count.index}"
