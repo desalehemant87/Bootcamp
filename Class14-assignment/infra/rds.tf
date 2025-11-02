@@ -31,7 +31,7 @@ resource "aws_db_instance" "postgres" {
   db_subnet_group_name  = aws_db_subnet_group.postgres.id
   ca_cert_identifier    = lookup(local.db_data, "ca_cert_name", var.db_default_settings.ca_cert_name)
   storage_encrypted     = true
-  storage_type          = "gp3"
+  storage_type          = "gp2"
   skip_final_snapshot   = true #false
   kms_key_id            = aws_kms_key.rds_kms.arn
   vpc_security_group_ids = [

@@ -19,8 +19,8 @@ variable "domain_name" {
 variable "db_default_settings" {
   type = any
   default = {
-    allocated_storage       = 10
-    max_allocated_storage   = 20
+    allocated_storage       = 20
+    max_allocated_storage   = 50
     engine_version          = "14.53-R3"
     engine                 = "postgres"
     instance_class          = "db.t4g.micro"
