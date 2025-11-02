@@ -26,7 +26,7 @@ variable "db_default_settings" {
     instance_class          = "db.t4g.micro"
     backup_retention_period = 7
     db_name                 = "postgres"
-    ca_cert_name            = "rds-ca-rsa2048-g1"
+    ca_cert_identifier      = "rds-ca-rsa2048-g1"
     db_admin_username       = "postgres"
   }
 }
