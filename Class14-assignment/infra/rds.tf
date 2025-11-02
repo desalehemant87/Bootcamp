@@ -25,7 +25,7 @@ resource "aws_db_instance" "postgres" {
   db_name                 = "postgres"
   ca_cert_identifier      = "rds-ca-rsa2048-g1"
   username                = "postgres"
-  #count                 = var.environment == "dev" ? 1 : 0
+  count                 = var.environment == "dev" ? 1 : 0
   # condition ? value_if_true : value_if_false -> ternary operator
   identifier            = "${var.environment}-${var.app_name}-db"
   #allocated_storage     = lookup(local.db_data, "allocated_storage", var.db_default_settings.allocated_storage)
