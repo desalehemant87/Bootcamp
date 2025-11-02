@@ -12,7 +12,7 @@ env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY_FRONTEND: dev-app-react
   ECR_REPOSITORY_BACKEND: dev-app-flask
-  IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: latest
 
 jobs:
 
