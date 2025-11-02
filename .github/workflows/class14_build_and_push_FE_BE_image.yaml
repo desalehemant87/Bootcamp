@@ -1,4 +1,4 @@
-name: Build and Push Flask and React Docker Images
+name: Class14 Build and Push Flask and React Docker Images
 
 on:
   # push:
