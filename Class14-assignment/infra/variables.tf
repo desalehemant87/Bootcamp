@@ -21,10 +21,10 @@ variable "db_default_settings" {
   default = {
     allocated_storage       = 20
     max_allocated_storage   = 50
-    engine_version          = "14.53-R3"
-    engine                 = "postgres"
+    engine_version          = "17.6"
+    engine                  = "postgres"
     instance_class          = "db.t4g.micro"
-    backup_retention_period = 2
+    backup_retention_period = 7
     db_name                 = "postgres"
     ca_cert_name            = "rds-ca-rsa2048-g1"
     db_admin_username       = "postgres"
