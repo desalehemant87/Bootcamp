@@ -1,14 +1,14 @@
 locals {
   db_data = {
-    allocated_storage       = "30"
-    max_allocated_storage   = 100
-    engine_version          = "14.15"
+    allocated_storage       = 20
+    max_allocated_storage   = 50
+    engine_version          = "17.6"
     engine                  = "postgres"
-    instance_class          = "db.t3.small"
-    ca_cert_name            = "rds-ca-rsa2048-g1"
+    instance_class          = "db.t4g.micro"
     backup_retention_period = 7
-    db_name                 = "mydb"
-    cloudwatch_logs         = ["postgresql", "upgrade"]
+    db_name                 = "postgres"
+    ca_cert_identifier      = "rds-ca-rsa2048-g1"
+    db_admin_username       = "postgres"
   }
 
   ecs_services = [

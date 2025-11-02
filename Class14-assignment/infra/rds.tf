@@ -16,15 +16,6 @@ resource "aws_kms_alias" "rds_kms_alias" {
 
 # RDS instance for dev environment
 resource "aws_db_instance" "postgres" {
-  #allocated_storage       = 20
-  #max_allocated_storage   = 50
-  #engine_version          = "17.6"
-  #engine                  = "postgres"
-  instance_class          = "db.t4g.micro"
-  #backup_retention_period = 7
-  #db_name                 = "postgres"
-  ca_cert_identifier      = "rds-ca-rsa2048-g1"
-  username                = "postgres"
   count                 = var.environment == "dev" ? 1 : 0
   # condition ? value_if_true : value_if_false -> ternary operator
   identifier            = "${var.environment}-${var.app_name}-db"
@@ -32,13 +23,13 @@ resource "aws_db_instance" "postgres" {
   max_allocated_storage = lookup(local.db_data, "max_allocated_storage", var.db_default_settings.max_allocated_storage)
   engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
   engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
-  #instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
-  #username              = var.db_default_settings.db_admin_username
+  instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
+  username              = var.db_default_settings.db_admin_username
   password              = random_password.dbs_random_string.result
   port                  = 5432
   publicly_accessible   = false
   db_subnet_group_name   = aws_db_subnet_group.postgres.id
-  #ca_cert_identifier     = lookup(local.db_data, "ca_cert_identifier", var.db_default_settings.ca_cert_identifier)
+  ca_cert_identifier     = lookup(local.db_data, "ca_cert_identifier", var.db_default_settings.ca_cert_identifier)
   storage_encrypted      = true
   storage_type          = "gp2"
   skip_final_snapshot   = true #false
