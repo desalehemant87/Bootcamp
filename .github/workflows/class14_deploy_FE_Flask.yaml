@@ -14,7 +14,7 @@ env:
   app_container_react: "react-app"
   aws_account: "059941826920"
   aws_region: "ap-south-1"
-  image_tag: ${{ github.sha }}
+  image_tag: latest
 
 
 
