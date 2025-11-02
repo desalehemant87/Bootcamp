@@ -34,12 +34,12 @@ resource "aws_db_instance" "postgres" {
   #engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
   #instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
   #username              = var.db_default_settings.db_admin_username
-  password              = random_password.dbs_random_string.result
+  password               = random_password.dbs_random_string.result
   #port                  = 5432
- # publicly_accessible   = false
-  db_subnet_group_name  = aws_db_subnet_group.postgres.id
+  #publicly_accessible   = false
+  db_subnet_group_name   = aws_db_subnet_group.postgres.id
   #ca_cert_identifier    = lookup(local.db_data, "ca_cert_name", var.db_default_settings.ca_cert_name)
-  #storage_encrypted     = true
+  storage_encrypted      = true
   #storage_type          = "gp2"
   skip_final_snapshot   = true #false
   kms_key_id            = aws_kms_key.rds_kms.arn
