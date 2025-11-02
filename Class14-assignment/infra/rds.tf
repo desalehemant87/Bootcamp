@@ -30,19 +30,17 @@ resource "aws_db_instance" "postgres" {
   publicly_accessible   = false
   db_subnet_group_name  = aws_db_subnet_group.postgres.id
   ca_cert_identifier    = lookup(local.db_data, "ca_cert_name", var.db_default_settings.ca_cert_name)
-  storage_encrypted     = true
-  storage_type          = "gp2"
+  #storage_encrypted     = true
+  #storage_type          = "gp2"
   skip_final_snapshot   = true #false
   kms_key_id            = aws_kms_key.rds_kms.arn
-  vpc_security_group_ids = [
-    aws_security_group.rds.id
-  ]
+  vpc_security_group_ids = [aws_security_group.rds.id]
 
-  backup_retention_period         = lookup(local.db_data, "backup_retention_period", var.db_default_settings.backup_retention_period)
+  #backup_retention_period         = lookup(local.db_data, "backup_retention_period", var.db_default_settings.backup_retention_period)
   db_name                         = lookup(local.db_data, "db_name", var.db_default_settings.db_name)
   #auto_minor_version_upgrade      = true
   #deletion_protection             = false # true
-  enabled_cloudwatch_logs_exports = lookup(local.db_data, "cloudwatch_logs", ["postgresql", "upgrade"])
+  #enabled_cloudwatch_logs_exports = lookup(local.db_data, "cloudwatch_logs", ["postgresql", "upgrade"])
   #copy_tags_to_snapshot           = true
 
   tags = {
