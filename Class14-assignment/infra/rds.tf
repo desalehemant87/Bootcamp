@@ -16,24 +16,24 @@ resource "aws_kms_alias" "rds_kms_alias" {
 
 # RDS instance for dev environment
 resource "aws_db_instance" "postgres" {
-  allocated_storage       = 20
-  max_allocated_storage   = 50
-  engine_version          = "17.6"
-  engine                  = "postgres"
-  instance_class          = "db.t4g.micro"
-  backup_retention_period = 7
-  db_name                 = "postgres"
+  #allocated_storage       = 20
+  #max_allocated_storage   = 50
+  #engine_version          = "17.6"
+  #engine                  = "postgres"
+  #instance_class          = "db.t4g.micro"
+  #backup_retention_period = 7
+  #db_name                 = "postgres"
   ca_cert_identifier      = "rds-ca-rsa2048-g1"
-  username                = "postgres"
+  #username                = "postgres"
   count                 = var.environment == "dev" ? 1 : 0
   # condition ? value_if_true : value_if_false -> ternary operator
   identifier            = "${var.environment}-${var.app_name}-db"
-  #allocated_storage     = lookup(local.db_data, "allocated_storage", var.db_default_settings.allocated_storage)
-  #max_allocated_storage = lookup(local.db_data, "max_allocated_storage", var.db_default_settings.max_allocated_storage)
-  #engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
-  #engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
-  #instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
-  #username              = var.db_default_settings.db_admin_username
+  allocated_storage     = lookup(local.db_data, "allocated_storage", var.db_default_settings.allocated_storage)
+  max_allocated_storage = lookup(local.db_data, "max_allocated_storage", var.db_default_settings.max_allocated_storage)
+  engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
+  engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
+  instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
+  username              = var.db_default_settings.db_admin_username
   password              = random_password.dbs_random_string.result
   port                  = 5432
   publicly_accessible   = false
@@ -44,8 +44,8 @@ resource "aws_db_instance" "postgres" {
   skip_final_snapshot   = true #false
   kms_key_id            = aws_kms_key.rds_kms.arn
   vpc_security_group_ids = [aws_security_group.rds.id]
-  #backup_retention_period         = lookup(local.db_data, "backup_retention_period", var.db_default_settings.backup_retention_period)
-  #db_name                         = lookup(local.db_data, "db_name", var.db_default_settings.db_name)
+  backup_retention_period         = lookup(local.db_data, "backup_retention_period", var.db_default_settings.backup_retention_period)
+  db_name                         = lookup(local.db_data, "db_name", var.db_default_settings.db_name)
   auto_minor_version_upgrade      = true
   deletion_protection             = false # true
   enabled_cloudwatch_logs_exports = lookup(local.db_data, "cloudwatch_logs", ["postgresql", "upgrade"])
