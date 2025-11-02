@@ -14,7 +14,7 @@ env:
   ecs_cluster: "dev-app-cluster"
   aws_account: "059941826920"
   aws_region: "ap-south-1"
-  #image_tag: "latest"
+  image_tag: "latest"
 
 
 
