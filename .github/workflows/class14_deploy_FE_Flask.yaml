@@ -11,7 +11,7 @@ env:
   ecr_repo_react: "059941826920.dkr.ecr.ap-south-1.amazonaws.com/dev-app-react"
   ecs_task_def_react: "dev-app-react"
   ecs_service_react: "dev-app-react-service"
-  app_container_react: "dev-app-react"
+  app_container_react: "react-app"
   aws_account: "059941826920"
   aws_region: "ap-south-1"
   image_tag: ${{ github.sha }}

@@ -10,7 +10,7 @@ env:
   ecr_repo_flask: "059941826920.dkr.ecr.ap-south-1.amazonaws.com/dev-app-flask"
   ecs_task_def_flask: "dev-app-flask"
   ecs_service_flask: "dev-app-flask-service"
-  app_container_flask: "dev-app-flask"
+  app_container_flask: "flask-app"
   ecs_cluster: "dev-app-cluster"
   aws_account: "059941826920"
   aws_region: "ap-south-1"
