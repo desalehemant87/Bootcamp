@@ -20,7 +20,7 @@ resource "aws_db_instance" "postgres" {
   #max_allocated_storage   = 50
   #engine_version          = "17.6"
   #engine                  = "postgres"
-  #instance_class          = "db.t4g.micro"
+  instance_class          = "db.t4g.micro"
   #backup_retention_period = 7
   #db_name                 = "postgres"
   ca_cert_identifier      = "rds-ca-rsa2048-g1"
@@ -32,7 +32,7 @@ resource "aws_db_instance" "postgres" {
   max_allocated_storage = lookup(local.db_data, "max_allocated_storage", var.db_default_settings.max_allocated_storage)
   engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
   engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
-  instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
+  #instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
   #username              = var.db_default_settings.db_admin_username
   password              = random_password.dbs_random_string.result
   port                  = 5432
