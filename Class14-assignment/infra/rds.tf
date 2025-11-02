@@ -16,6 +16,7 @@ resource "aws_kms_alias" "rds_kms_alias" {
 
 # RDS instance for dev environment
 resource "aws_db_instance" "postgres" {
+  
   count                 = var.environment == "dev" ? 1 : 0
   # condition ? value_if_true : value_if_false -> ternary operator
   identifier            = "${var.environment}-${var.app_name}-db"
