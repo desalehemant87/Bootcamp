@@ -24,7 +24,7 @@ resource "aws_db_instance" "postgres" {
   #backup_retention_period = 7
   #db_name                 = "postgres"
   ca_cert_identifier      = "rds-ca-rsa2048-g1"
-  #username                = "postgres"
+  username                = "postgres"
   count                 = var.environment == "dev" ? 1 : 0
   # condition ? value_if_true : value_if_false -> ternary operator
   identifier            = "${var.environment}-${var.app_name}-db"
@@ -33,7 +33,7 @@ resource "aws_db_instance" "postgres" {
   engine                = lookup(local.db_data, "engine", var.db_default_settings.engine)
   engine_version        = lookup(local.db_data, "engine_version", var.db_default_settings.engine_version)
   instance_class        = lookup(local.db_data, "instance_class", var.db_default_settings.instance_class)
-  username              = var.db_default_settings.db_admin_username
+  #username              = var.db_default_settings.db_admin_username
   password              = random_password.dbs_random_string.result
   port                  = 5432
   publicly_accessible   = false
