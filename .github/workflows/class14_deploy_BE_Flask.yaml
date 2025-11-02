@@ -47,7 +47,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ env.app_container_flask }}
-          image: ${{ env.ecr_repo_flask }}:${{ env.image_tag }}
+          image: ${{ env.ecr_repo_flask }}
 
       - name: Deploy app on Amazon ECS task definition
         if: ${{ github.ref == 'refs/heads/main' }}
